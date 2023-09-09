@@ -10,4 +10,11 @@
 <a href="{{Route('cursos.edit',$curso)}}">Editar Curso</a>
 <p><strong>Categoria: {{$curso->categoria}}</strong></p>
 <P>{{$curso->descripcion}}</P>
+
+<form action="{{route('cursos.destroy',$curso)}}" method="POST">
+    @csrf
+    @method('delete')
+    <button type="submit">Eliminar</button>
+</form>
+
 @endsection
