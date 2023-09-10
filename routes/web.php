@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +17,30 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
-Route::controller(CursoController::class)->group(function () {
-    Route::get('/cursos', 'index')->name('cursos.index');
-    Route::get('/cursos/create', 'create')->name('cursos.create');
-    Route::get('/cursos/{curso}', 'show')->name('cursos.show');
-});
+Route::resource('cursos', CursoController::class);
 
-Route::post('cursos', [CursoController::class, 'store'])->name('cursos.store');
+Route::view('nosotros','nosotros')->name('nosotros');
 
-Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+Route::get('contactanos', [ContactanosController::class, 'index'])->name('contactanos.index');
+
+Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
+
+// Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
 
 
-Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+// Route::controller(CursoController::class)->group(function () {
+//     Route::get('/cursos', 'index')->name('cursos.index');
+//     Route::get('/cursos/create', 'create')->name('cursos.create');
+//     Route::get('/cursos/{curso}', 'show')->name('cursos.show');
+// });
 
-Route::delete('curso/{curso}',[CursoController::class, 'destroy'])->name('cursos.destroy');
+// Route::post('cursos', [CursoController::class, 'store'])->name('cursos.store');
+
+// Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+
+
+// Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+
+// Route::delete('curso/{curso}',[CursoController::class, 'destroy'])->name('cursos.destroy');

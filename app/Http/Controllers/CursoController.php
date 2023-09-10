@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCurso;
 use App\Models\Curso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Return_;
 
 class CursoController extends Controller
 {
@@ -34,6 +35,7 @@ class CursoController extends Controller
         //     'categoria'=> $request->categoria
         // ]);
         //  return $request->all();
+   
         $curso = Curso::create($request->all());
 
         return redirect()->route('cursos.show', $curso);
