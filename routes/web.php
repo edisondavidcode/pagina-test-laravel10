@@ -44,3 +44,12 @@ Route::post('contactanos', [ContactanosController::class, 'store'])->name('conta
 // Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
 
 // Route::delete('curso/{curso}',[CursoController::class, 'destroy'])->name('cursos.destroy');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
